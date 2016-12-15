@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         //JNI ERROR (app bug): local reference table overflow (max=512)
         //向JNI传递大量的数据，或new出大量对象时，如果不及时释放，则会造成上述错误，比如输入1000
-        Info[] infos = infoFromJNI(150);
+        Info[] infos = infoFromJNI(1000);
         for (Info info : infos)
         {
             System.out.println(info.toString());

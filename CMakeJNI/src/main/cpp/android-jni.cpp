@@ -7,7 +7,7 @@
 #define LOGE(...)  __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 
-char * newString(int num);
+char * intToStr(int num);
 
 extern "C"
 jstring
@@ -19,7 +19,7 @@ Java_com_excellence_androidjni_MainActivity_stringFromJNI(
 }
 
 // C/C++不能返回局部创建变量,可以返回地址
-char * newString(int num) {
+char * intToStr(int num) {
     int count = 1;
     int index = num;
     while (index > 0) {
@@ -57,10 +57,18 @@ Java_com_excellence_androidjni_MainActivity_infoFromJNI(JNIEnv *env, jobject ins
     for (int i = 0; i < num; i++) {
         LOGD("************ %d", i);
         jobject obj = env->NewObject(classINFO, consID);
-        LOGE("%d的占用空间:%d 转化为字符串:%s", i, sizeof(i), newString(i));
-        env->SetObjectField(obj, name, env->NewStringUTF(newString(i)));
+        jstring stringName = env->NewStringUTF(intToStr(i));
+        env->SetObjectField(obj, name, stringName);
         env->SetIntField(obj, id, i);
         env->SetObjectArrayElement(infos, i, obj);
+
+        //释放object引用
+        env->DeleteLocalRef(obj);
+        env->DeleteLocalRef(stringName);
     }
+
+    //释放object引用
+    env->DeleteLocalRef(classINFO);
+
     return infos;
 }
