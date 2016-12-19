@@ -49,10 +49,10 @@ Java_com_excellence_androidjni_MainActivity_infoListFromJNI(JNIEnv *env, jobject
     //获得ArrayList类引用
     jclass listCls = env->FindClass("java/util/ArrayList");
     //获得得带参数构造函数Id
-    jmethodID costruct = env->GetMethodID(listCls, "<init>", "()V");
-    //创建一个Arraylist集合对象
-    jobject listObj = env->NewObject(listCls, costruct);
-    //获得Arraylist类中的 add()方法ID，其方法原型为： boolean add(Object object) ;
+    jmethodID construct = env->GetMethodID(listCls, "<init>", "()V");
+    //创建一个ArrayList集合对象
+    jobject listObj = env->NewObject(listCls, construct);
+    //获得ArrayList类中的 add()方法ID，其方法原型为： boolean add(Object object) ;
     jmethodID listAdd = env->GetMethodID(listCls, "add", "(Ljava/lang/Object;)Z");
 
     //获取类引用
