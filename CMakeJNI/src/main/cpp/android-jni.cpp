@@ -1,5 +1,6 @@
 #include "android-jni.h"
 
+//返回String
 jstring
 Java_com_excellence_androidjni_MainActivity_stringFromJNI(
         JNIEnv *env,
