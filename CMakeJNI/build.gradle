@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11"
@@ -18,6 +19,7 @@ android {
 
         ndk{
             //Cmake会自动打包so文件到APK的lib中，反编译APK可以看到
+            //可能生成文件名不一样，CMakeLists.txt里面设置了生成的.so文件名
             //生成.so文件名
             moduleName "libJNITest"
             //添加log打印

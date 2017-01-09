@@ -2,6 +2,7 @@
 # library. You should either keep the default value or only pass a
 # value of 3.4.0 or lower.
 
+#cmake 所支持的最小版本
 cmake_minimum_required(VERSION 3.4.1)
 
 # Creates and names a library, sets it as either STATIC
@@ -10,14 +11,17 @@ cmake_minimum_required(VERSION 3.4.1)
 # Gradle automatically packages shared libraries with your APK.
 
 add_library( # Sets the name of the library.
+             #最终编译生成的库名
              android-jni
 
              # Sets the library as a shared library.
+             #声明生成的库为动态库，亦为STATIC
              SHARED
 
              # Provides a relative path to your source file(s).
              # Associated headers in the same location as their source
              # file are automatically included.
+             #C源文件，若此目录包含.h文件，不需要写上，cmake会自动包括进去
              src/main/cpp/android-jni.cpp )
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -27,16 +31,19 @@ add_library( # Sets the name of the library.
 # completing its build.
 
 find_library( # Sets the name of the path variable.
+			  #log-lib变量，给它赋值log
               log-lib
 
               # Specifies the name of the NDK library that
               # you want CMake to locate.
+              #android系统的打印信息库
               log )
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in the
 # build script, prebuilt third-party libraries, or system libraries.
 
+#把所依赖的库link进来
 target_link_libraries( # Specifies the target library.
                        android-jni
 
